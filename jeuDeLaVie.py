@@ -2,21 +2,12 @@ import random
 # import turtle
 
 def verifierTailleGrille(tailleGrille):
-    if type(tailleGrille) != list:
-        print("[ERREUR] : tailleGrille n'est pas de type list")
-        return False
-    
-    if len(tailleGrille) != 3:
-        print("[ERREUR] : tailleGrille n'a pas la bonne taille")
+    assert type(tailleGrille) == list
+    assert len(tailleGrille) == 3
 
     for elem in tailleGrille:
-        if type(elem) == float:
-            print("[ERREUR] : " + str(elem) + " n'est pas de type int")
-            return False
-        
-        if elem <= 0:
-            print("[ERREUR] : " + str(elem) + " est inférieur à 0")
-            return False
+        assert type(elem) == int
+        assert elem > 0
         
     return True
 
