@@ -67,6 +67,59 @@ def dessinerGrille(tailleGrille, grille):
         position[0] = 1
         position[1] += tailleGrille[2]
 
+def detectionCellulesVivantes(grille, position):
+    cellulesVivantes = 0
+
+    if position[0] == 0:
+        if position[1] == 0:
+            cellulesVivantes += grille[0][1] + grille[1][0] + grille[1][1]
+
+        elif position[1] == len(grille) - 1:
+            cellulesVivantes += grille[len(grille) - 2][0] + grille[len(grille) - 1][1] + grille[len(grille) - 2][1]
+
+        else:
+            cellulesVivantes += grille[position[1] + 1][0] + grille[position[1] - 1][0]
+
+            for posY in range(-1, 2):
+                cellulesVivantes += grille[position[1] + posY][1]
+    
+    elif position[0] == len(grille[0]) - 1:
+        if position[1] == 0:
+            cellulesVivantes += grille[0][len(grille[0]) - 2] + grille[1][len(grille[0]) - 1] + grille[1][len(grille[0]) - 2]
+
+        elif position[1] == len(grille) - 1:
+            cellulesVivantes += grille[len(grille) - 2][len(grille[0]) - 2] + grille[len(grille) - 1][len(grille[0]) - 2] + grille[len(grille) - 2][len(grille[0]) - 1]
+
+        else:
+            cellulesVivantes += grille[position[1] + 1][len(grille[0]) - 1] + grille[position[1] - 1][len(grille[0]) - 1]
+
+            for posY in range(-1, 2):
+                cellulesVivantes += grille[position[1] + posY][len(grille[0]) - 2]
+
+    else:
+        if position[1] == 0:
+            cellulesVivantes += grille[0][position[0] + 1] + grille[0][position[0] - 1]
+
+            for posX in range(-1, 2):
+                cellulesVivantes += grille[1][position[0] + posX]
+            
+            return 
+
+        elif position[1] == len(grille) - 1:
+            cellulesVivantes += grille[len(grille) - 1][position[0] + 1] + grille[len(grille) - 1][position[0] - 1]
+
+            for posX in range(-1, 2):
+                cellulesVivantes += grille[len(grille) - 2][position[0] + posX]
+
+        else:
+            cellulesVivantes += grille[position[1]][position[0] + 1] + grille[position[1]][position[0] - 1]
+
+            for posX in range(-1, 2):
+                cellulesVivantes += grille[position[1] + 1][position[0] + posX] + grille[position[1] - 1][position[0] + posX]
+
+    return cellulesVivantes
+
+
 clear()
 
 tailleGrille = [20, 20, 10]
